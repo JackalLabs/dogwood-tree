@@ -32,10 +32,32 @@ export async function setDelay(seconds: number): Promise<void> {
 }
 
 /**
- * Convert number of seconds to number of miliseconds.
+ * Convert number of seconds to number of milliseconds.
  * @param {number} seconds - Number of seconds to convert.
  * @returns {number}
  */
 export function secondToMS(seconds: number): number {
   return seconds * oneSecondMs
+}
+
+/**
+ * Calculate the number of branches tree will contain.
+ * @param {number} leaves - Number of source leaves in the tree.
+ * @returns {number}
+ */
+export function calculateBranches(leaves: number): number {
+  return Math.pow(2, Math.ceil(Math.log2(leaves)))
+}
+
+/**
+ * Converts string to Uint8Array.
+ * @param {string} str - String to convert.
+ * @returns {Uint8Array} - Converted result.
+ */
+export function stringToUint8(str: string): Uint8Array {
+  const uintView = new Uint8Array(str.length)
+  for (let i = 0; i < str.length; i++) {
+    uintView[i] = str.charCodeAt(i)
+  }
+  return uintView
 }

@@ -1,1 +1,1 @@
-export * from '@/classes/sampleHandler'
+export * from '@/classes/merkletree'

@@ -1,1 +1,1 @@
-export * from '@/interfaces/classes/ISampleHandler'
+export * from '@/interfaces/classes/IMerkletree'
