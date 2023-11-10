@@ -1,0 +1,62 @@
+{
+  "name": "@jackallabs/sample",
+  "version": "0.0.0",
+  "description": "SAMPLE DESCRIPTION",
+  "keywords": [],
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "type": "module",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && vite build",
+    "packit": "npm run build && npm pack --pack-destination packs",
+    "gen-docs": "npx typedoc"
+  },
+  "contributors": [
+    {
+      "name": "Jackal Labs",
+      "email": "devadmin@jackallabs.io",
+      "url": "https://jackallabs.io"
+    },
+    {
+      "name": "Example",
+      "email": "example@jackallabs.io"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JackalLabs/template_vite_module.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JackalLabs/template_vite_module/issues"
+  },
+  "homepage": "https://github.com/JackalLabs/template_vite_module/#README",
+  "dependencies": {},
+  "devDependencies": {
+    "@btmills/prettier": "2.8.8",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "@vitest/coverage-c8": "0.31.4",
+    "eslint": "8.41.0",
+    "eslint-config-prettier": "8.8.0",
+    "rollup-plugin-typescript-paths": "^1.4.0",
+    "typedoc": "^0.24.8",
+    "typescript": "^5.1.6",
+    "vite": "^4.5.0",
+    "vite-plugin-dts": "^2.3.0",
+    "vite-tsconfig-paths": "^4.2.1",
+    "vitest": "0.31.1"
+  }
+}
