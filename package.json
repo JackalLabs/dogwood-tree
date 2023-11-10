@@ -1,8 +1,10 @@
 {
-  "name": "@jackallabs/sample",
+  "name": "@jackallabs/dogwood",
   "version": "0.0.0",
-  "description": "SAMPLE DESCRIPTION",
-  "keywords": [],
+  "description": "JS Merkletree implementation",
+  "keywords": [
+    "merkletree"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.es.js",
@@ -28,20 +30,22 @@
       "url": "https://jackallabs.io"
     },
     {
-      "name": "Example",
-      "email": "example@jackallabs.io"
+      "name": "Erin Rivas",
+      "email": "erin@jackallabs.io"
     }
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JackalLabs/template_vite_module.git"
+    "url": "git+https://github.com/JackalLabs/dogwood.git"
   },
   "bugs": {
-    "url": "https://github.com/JackalLabs/template_vite_module/issues"
+    "url": "https://github.com/JackalLabs/dogwood/issues"
   },
-  "homepage": "https://github.com/JackalLabs/template_vite_module/#README",
-  "dependencies": {},
+  "homepage": "https://github.com/JackalLabs/dogwood/#README",
+  "dependencies": {
+    "js-sha3": "^0.9.2"
+  },
   "devDependencies": {
     "@btmills/prettier": "2.8.8",
     "@rollup/plugin-commonjs": "^25.0.7",

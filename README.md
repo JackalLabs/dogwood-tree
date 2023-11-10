@@ -1,2 +1,2 @@
-# template_vite_module
-Template for creating new Jackal Labs Vite modules.
+# Dogwood
+JS Merkletree implementation

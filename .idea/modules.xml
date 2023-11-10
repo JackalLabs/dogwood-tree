@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/template_vite_module.iml" filepath="$PROJECT_DIR$/.idea/template_vite_module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/dogwood.iml" filepath="$PROJECT_DIR$/.idea/dogwood.iml" />
     </modules>
   </component>
 </project>

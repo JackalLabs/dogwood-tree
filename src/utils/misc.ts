@@ -13,7 +13,7 @@ export function deprecated(
   version: string,
   opts?: { aggressive?: boolean; replacement?: string }
 ) {
-  let notice = `SAMPLE | ${thing} is deprecated as of: ${version}`
+  let notice = `Dogwood | ${thing} is deprecated as of: ${version}`
   if (opts?.replacement) {
     notice += ` - Please use ${opts.replacement} instead`
   }

@@ -10,7 +10,6 @@ export default defineConfig({
   base: './',
   plugins: [
     tsconfigPaths(),
-    // nodePolyfills(),
     dts({ rollupTypes: true })
   ],
   resolve: {
