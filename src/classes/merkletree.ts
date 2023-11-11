@@ -1,9 +1,10 @@
-import { sha3_512 } from 'js-sha3'
-
-import { IMerkletree } from '@/interfaces/classes'
+import { IMerkletree, IPollard, IProof } from '@/interfaces/classes'
 import { IMerkletreeSource } from '@/interfaces/IMerkletreeSource'
 import { calculateBranches, stringToUint8 } from '@/utils/misc'
 import { branchHashOptions, bufferToHex } from '@/utils/hash'
+import { arrayBuffersMatch } from '@/utils/comparisons'
+import { Pollard } from '@/classes/pollard'
+import { Proof } from '@/classes/proof'
 
 export class Merkletree implements IMerkletree {
   protected readonly root: ArrayBuffer
@@ -75,11 +76,41 @@ export class Merkletree implements IMerkletree {
   getSalt(): boolean {
     return this.salted
   }
-  getPollard(height: number): Array<ArrayBuffer> {
+
+  generatePollard(height: number): IPollard {
     if (this.nodes.length === 0) {
       throw new Error('Data was not preserved!')
     } else {
-      return this.nodes.slice(1, Math.pow(2, height + 1))
+      return new Pollard(this.nodes.slice(1, Math.pow(2, height + 1)), this.hash, height)
     }
   }
+  generateProof(data: ArrayBuffer, height: number): IProof {
+    if (this.nodes.length === 0) {
+      throw new Error('Data was not preserved!')
+    } else {
+      const index = indexOf(data, this.source)
+      if (index === -1) {
+        throw new Error('Data is not present!')
+      } else {
+        const proofLen = Math.ceil(Math.log2(this.source.length)) - height
+        const hashes: Array<ArrayBuffer> = Array(proofLen).fill(new ArrayBuffer(64))
+
+        const it = index + this.nodes.length / 2
+        const limit = Math.pow(2, height + 1) - 1
+        for (let i = it, ii = 0; i > limit; i /= 2, ii++) {
+          hashes[ii] = this.nodes[i^1]
+        }
+        return new Proof(hashes, index, this.hash, this.salted, this.generatePollard(height))
+      }
+    }
+  }
+}
+
+function indexOf(needle: ArrayBuffer, haystack: Array<ArrayBuffer>): number {
+  for (let i = 0; i < haystack.length; i++) {
+    if (arrayBuffersMatch(needle, haystack[i])) {
+      return i
+    }
+  }
+  return -1
 }

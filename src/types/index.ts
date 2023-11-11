@@ -1,1 +1,2 @@
-export * from '@/types/TSAMPLE'
+export * from '@/types/TOneOf'
+export * from '@/types/TTypedArrays'

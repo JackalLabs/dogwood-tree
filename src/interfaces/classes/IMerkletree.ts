@@ -1,6 +1,10 @@
+import { IPollard, IProof } from '@/interfaces/classes'
+
 export interface IMerkletree {
   getRoot(): ArrayBuffer
   getRootAsHex(): string
   getSalt(): boolean
-  getPollard(height: number): Array<ArrayBuffer>
+
+  generatePollard(height: number): IPollard
+  generateProof(data: ArrayBuffer, height: number): IProof
 }
