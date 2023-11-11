@@ -1,5 +1,5 @@
 {
-  "name": "@jackallabs/dogwood",
+  "name": "@jackallabs/dogwood-tree",
   "version": "0.0.0",
   "description": "JS Merkletree implementation",
   "keywords": [
@@ -37,12 +37,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JackalLabs/dogwood.git"
+    "url": "git+https://github.com/JackalLabs/dogwood-tree.git"
   },
   "bugs": {
-    "url": "https://github.com/JackalLabs/dogwood/issues"
+    "url": "https://github.com/JackalLabs/dogwood-tree/issues"
   },
-  "homepage": "https://github.com/JackalLabs/dogwood/#README",
+  "homepage": "https://github.com/JackalLabs/dogwood-tree/#README",
   "dependencies": {
     "js-sha3": "^0.9.2"
   },
