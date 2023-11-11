@@ -1,3 +1,10 @@
+import { sha3_512 } from 'js-sha3'
+import { IHashFunctionOptions } from '@/interfaces/IHashFunctionOptions'
+
+export const branchHashOptions: IHashFunctionOptions = {
+  'sha3_512': sha3_512.arrayBuffer
+}
+
 /**
  * Converts ArrayBuffer into a hex encoded string.
  * @param {ArrayBuffer} buf - ArrayBuffer source to encode.

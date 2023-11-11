@@ -3,7 +3,7 @@ import { sha3_512 } from 'js-sha3'
 import { IMerkletree } from '@/interfaces/classes'
 import { IMerkletreeSource } from '@/interfaces/IMerkletreeSource'
 import { calculateBranches, stringToUint8 } from '@/utils/misc'
-import { bufferToHex } from '@/utils/hash'
+import { branchHashOptions, bufferToHex } from '@/utils/hash'
 
 export class Merkletree implements IMerkletree {
   protected readonly root: ArrayBuffer
@@ -23,13 +23,13 @@ export class Merkletree implements IMerkletree {
   }
 
   static async grow(input: IMerkletreeSource): Promise<IMerkletree> {
-    let { seed, sapling, chunkSize, hashType = 'sha3_512', useSalt, sort, preserve } = input
+    let { seed, sapling, chunkSize, hashType = 'sha3_512', useSalt = false, sort = false, preserve = true } = input
 
     if (sapling) {
       // do nothing
     } else if (seed && chunkSize) {
       sapling = []
-      for (let i = 0, ii = 0; i < seed.byteLength; i += chunkSize) {
+      for (let i = 0, ii = 0; i < seed.byteLength; i += chunkSize, ii++) {
         const bufChunk = seed.slice(i, i + chunkSize)
         const str = ii.toString() + bufferToHex(bufChunk)
         const hashName = await crypto.subtle.digest(
@@ -37,11 +37,15 @@ export class Merkletree implements IMerkletree {
           stringToUint8(str),
         )
         sapling.push(hashName)
-        ii++
       }
     } else {
       throw new Error('No Data Provided!')
     }
+
+    if (!Object.keys(branchHashOptions).includes(hashType)) {
+      throw new Error(`Unsupported hashType of "${hashType}"!`)
+    }
+    const hashFunc = branchHashOptions[hashType]
 
     const branchesLen = calculateBranches(sapling.length)
     const nodeLen =
@@ -49,17 +53,17 @@ export class Merkletree implements IMerkletree {
     const nodes: Array<ArrayBuffer> = Array(nodeLen).fill(new ArrayBuffer(64))
 
     for (let i = 0; i < sapling.length; i++) {
-      nodes[branchesLen + i] = sha3_512.arrayBuffer(sapling[i])
+      nodes[branchesLen + i] = hashFunc(sapling[i])
     }
 
     for (let i = branchesLen - 1; i > 0; i--) {
       const left = nodes[i * 2]
       const right = nodes[i * 2 + 1]
       const concat = await new Blob([left, right]).arrayBuffer()
-      nodes[i] = sha3_512.arrayBuffer(concat)
+      nodes[i] = hashFunc(concat)
     }
 
-    return new Merkletree(nodes[1], !!preserve, sapling, nodes, hashType, !!useSalt, !!sort)
+    return new Merkletree(nodes[1], preserve, sapling, nodes, hashType, useSalt, sort)
   }
 
   getRoot(): ArrayBuffer {
