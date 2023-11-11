@@ -1,2 +1,2 @@
-# Dogwood
+# Dogwood-tree
 JS Merkletree implementation
