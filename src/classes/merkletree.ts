@@ -4,16 +4,26 @@ import { branchHashOptions, bufferToHex } from '@/utils/hash'
 import { arrayBuffersMatch } from '@/utils/comparisons'
 import type { IMerkletreeSource } from '@/interfaces'
 import type { IMerkletree, IPollard, IProof } from '@/interfaces/classes'
+import type { TBranchHashOptionKeys } from '@/types'
 
+/**
+ * @class Merkletree
+ * @desc - Merkletree instance.
+ * @see {IMerkletree}
+ */
 export class Merkletree implements IMerkletree {
   protected readonly root: ArrayBuffer
   protected readonly source: Array<ArrayBuffer>
   protected readonly nodes: Array<ArrayBuffer>
-  protected readonly hash: string
+  protected readonly hash: TBranchHashOptionKeys
   protected readonly salted: boolean
   protected readonly sorted: boolean
 
-  protected constructor(r: ArrayBuffer, p: boolean, sap: Array<ArrayBuffer>, n: Array<ArrayBuffer>, h: string, u: boolean, s: boolean) {
+  /**
+   * @constructor Merkletree
+   * @protected
+   */
+  protected constructor(r: ArrayBuffer, p: boolean, sap: Array<ArrayBuffer>, n: Array<ArrayBuffer>, h: TBranchHashOptionKeys, u: boolean, s: boolean) {
     this.root = r
     this.source = p ? sap : []
     this.nodes = p ? n : []
@@ -22,6 +32,11 @@ export class Merkletree implements IMerkletree {
     this.sorted = s
   }
 
+  /**
+   * @constructor Merkletree
+   * @param {IMerkletreeSource} input - Merkletree creation parameters.
+   * @returns {Promise<IMerkletree>}
+   */
   static async grow(input: IMerkletreeSource): Promise<IMerkletree> {
     let { seed, sapling, chunkSize, hashType = 'sha3_512', useSalt = false, sort = false, preserve = true } = input
 

@@ -1,20 +1,34 @@
 import { branchHashOptions } from '@/utils/hash'
 import { arrayBuffersMatch } from '@/utils/comparisons'
 import type { IPollard, IProof } from '@/interfaces/classes'
+import type { TBranchHashOptionKeys } from '@/types'
 
+/**
+ * @class Proof
+ * @desc - Merkletree Proof.
+ * @see {IProof}
+ */
 export class Proof implements IProof {
   protected readonly hashes: Array<ArrayBuffer>
   protected readonly index: number
-  protected readonly hashType: string
+  protected readonly hashType: TBranchHashOptionKeys
   protected readonly salted: boolean
   protected readonly pollard: IPollard
 
-  constructor (h: Array<ArrayBuffer>, i: number, t: string, s: boolean, p: IPollard) {
-    this.hashes = h
-    this.index = i
-    this.hashType = t
-    this.salted = s
-    this.pollard = p
+  /**
+   * @constructor Proof
+   * @param {Array<ArrayBuffer>} hashes - Merkletree hashes.
+   * @param {number} index - Merkletree index.
+   * @param {TBranchHashOptionKeys} hashType - Merkletree hash type used.
+   * @param {boolean} salted - If merkletree was salted.
+   * @param {IPollard} pollard - Pollard instance to use as source.
+  */
+  constructor (hashes: Array<ArrayBuffer>, index: number, hashType: TBranchHashOptionKeys, salted: boolean, pollard: IPollard) {
+    this.hashes = hashes
+    this.index = index
+    this.hashType = hashType
+    this.salted = salted
+    this.pollard = pollard
   }
 
   async verify(data: ArrayBuffer): Promise<boolean> {

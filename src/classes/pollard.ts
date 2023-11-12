@@ -1,13 +1,25 @@
 import { branchHashOptions } from '@/utils/hash'
 import { arrayBuffersMatch } from '@/utils/comparisons'
 import type { IPollard } from '@/interfaces/classes'
+import type { TBranchHashOptionKeys } from '@/types'
 
+/**
+ * @class Pollard
+ * @desc - Merkletree Pollard.
+ * @see {IPollard}
+ */
 export class Pollard implements IPollard {
   protected readonly hashes: Array<ArrayBuffer>
-  protected readonly hashType: string
+  protected readonly hashType: TBranchHashOptionKeys
   protected readonly height: number
 
-  constructor (hashes: Array<ArrayBuffer>, hashType: string, height: number) {
+  /**
+   * @constructor Pollard
+   * @param {Array<ArrayBuffer>} hashes - Merkletree hashes.
+   * @param {TBranchHashOptionKeys} hashType - Merkletree hash type used.
+   * @param {number} height - Height in Merkletree.
+   */
+  constructor (hashes: Array<ArrayBuffer>, hashType: TBranchHashOptionKeys, height: number) {
     this.hashes = hashes
     this.hashType = hashType
     this.height = height
