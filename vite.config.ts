@@ -29,7 +29,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       fileName: (format) => `index.${format}.js`,
-      name: 'SAMPLE'
+      name: 'dogwood-tree'
     },
     rollupOptions: {
       external: [],
