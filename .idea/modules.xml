@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/dogwood.iml" filepath="$PROJECT_DIR$/.idea/dogwood.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/dogwood-tree.iml" filepath="$PROJECT_DIR$/.idea/dogwood-tree.iml" />
     </modules>
   </component>
 </project>
