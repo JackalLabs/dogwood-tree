@@ -6,7 +6,7 @@ export class MultiProof implements IMultiProof {
   }
 
   async verify(data: Array<ArrayBuffer>): Promise<boolean> {
+    console.log(data)
     return false
   }
-
 }
