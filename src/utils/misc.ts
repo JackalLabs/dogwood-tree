@@ -1,5 +1,3 @@
-const oneSecondMs = 1000
-
 /**
  * Notify that function is deprecated and should no longer be used.
  * @param {string} thing - Name of deprecated item. Example: "[ParentContext] functionName()".
@@ -19,25 +17,6 @@ export function deprecated(
   }
   console.error(notice)
   if (opts?.aggressive) alert(notice)
-}
-
-/**
- * Set a timer.
- * @param {number} seconds - Duration of timer in ms.
- * @returns {Promise<void>}
- */
-export async function setDelay(seconds: number): Promise<void> {
-  const delay = secondToMS(Number(seconds))
-  await new Promise((resolve) => setTimeout(resolve, delay))
-}
-
-/**
- * Convert number of seconds to number of milliseconds.
- * @param {number} seconds - Number of seconds to convert.
- * @returns {number}
- */
-export function secondToMS(seconds: number): number {
-  return seconds * oneSecondMs
 }
 
 /**

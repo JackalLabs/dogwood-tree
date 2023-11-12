@@ -1,4 +1,4 @@
-import { IPollard, IProof } from '@/interfaces/classes'
+import type { IPollard, IProof } from '@/interfaces/classes'
 
 export interface IMerkletree {
   getRoot(): ArrayBuffer

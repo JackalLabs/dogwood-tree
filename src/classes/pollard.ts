@@ -1,6 +1,6 @@
-import { IPollard } from '@/interfaces/classes'
 import { branchHashOptions } from '@/utils/hash'
 import { arrayBuffersMatch } from '@/utils/comparisons'
+import type { IPollard } from '@/interfaces/classes'
 
 export class Pollard implements IPollard {
   protected readonly hashes: Array<ArrayBuffer>

@@ -1,10 +1,9 @@
-import { IMerkletree, IPollard, IProof } from '@/interfaces/classes'
-import { IMerkletreeSource } from '@/interfaces/IMerkletreeSource'
+import { Pollard, Proof } from '@/classes'
 import { calculateBranches, stringToUint8 } from '@/utils/misc'
 import { branchHashOptions, bufferToHex } from '@/utils/hash'
 import { arrayBuffersMatch } from '@/utils/comparisons'
-import { Pollard } from '@/classes/pollard'
-import { Proof } from '@/classes/proof'
+import type { IMerkletreeSource } from '@/interfaces'
+import type { IMerkletree, IPollard, IProof } from '@/interfaces/classes'
 
 export class Merkletree implements IMerkletree {
   protected readonly root: ArrayBuffer

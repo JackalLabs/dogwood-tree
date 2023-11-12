@@ -1,4 +1,4 @@
-import { IMultiProof } from '@/interfaces'
+import type { IMultiProof } from '@/interfaces'
 
 export class MultiProof implements IMultiProof {
 

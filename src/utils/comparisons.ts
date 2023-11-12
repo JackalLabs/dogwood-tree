@@ -1,5 +1,11 @@
-import { TTypedArrays } from '@/types'
+import type { TTypedArrays } from '@/types'
 
+/**
+ * Compares 2 ArrayBuffers and returns true if they are an exact match.
+ * @param {ArrayBuffer} a - First ArrayBuffer to compare.
+ * @param {ArrayBuffer} b - Second ArrayBuffer to compare.
+ * @returns {boolean}
+ */
 export function arrayBuffersMatch(a: ArrayBuffer, b: ArrayBuffer): boolean {
   if (a.byteLength !== b.byteLength) {
     return false
@@ -17,6 +23,12 @@ export function arrayBuffersMatch(a: ArrayBuffer, b: ArrayBuffer): boolean {
   }
 }
 
+/**
+ * Compares 2 TypedArrays and returns true if they are an exact match.
+ * @param {TTypedArrays} a - First TypedArray to compare.
+ * @param {TTypedArrays} b - Second TypedArray to compare.
+ * @returns {boolean}
+ */
 export function typedArraysMatch<T extends TTypedArrays>(a: T, b: T): boolean {
   if (a.byteLength !== b.byteLength) {
     return false

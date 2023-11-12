@@ -1,6 +1,6 @@
-import { IPollard, IProof } from '@/interfaces/classes'
 import { branchHashOptions } from '@/utils/hash'
 import { arrayBuffersMatch } from '@/utils/comparisons'
+import type { IPollard, IProof } from '@/interfaces/classes'
 
 export class Proof implements IProof {
   protected readonly hashes: Array<ArrayBuffer>
