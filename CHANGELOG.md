@@ -7,9 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 <!-- #### Added -->
 <!-- #### Changed -->
 <!-- #### Removed -->
-<!-- ## [Unreleased] -->
+<!-- #### Diff -->
+
+## [Unreleased]
 
 ## Major Releases:
+### [v1.0.0] - 2023 11 14
+#### Added
+- Initial Release
+#### Diff
 - None
 
 ## Minor Releases:
@@ -17,5 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- LINKS -->
 <!-- RELEASES -->
-[Unreleased]: https://github.com/JackalLabs/template_vite_module/compare/v0.0.1...dev
+[v1.0.0]: https://github.com/JackalLabs/dogwood-tree/releases/tag/v1.0.0
+<!-- DIFFS -->
+[Unreleased]: https://github.com/JackalLabs/dogwood-tree/compare/v1.0.0...dev
 <!-- ISSUES -->

@@ -1,3 +1,3 @@
-export * from '@/classes/merkletree'
+export * from '@/classes'
 export * from '@/interfaces'
 export * from '@/types'
