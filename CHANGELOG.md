@@ -21,7 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Minor Releases:
 ### [v1.0.1] - TBD
 #### Changed
-- TBD
+- Corrected error with generating empty bundle.
+- Activated GitHub workflows for tag and publish.
+- Updated Vite to v5.0.5.
 #### Diff
 - [v1.0.1 Changes]
 
