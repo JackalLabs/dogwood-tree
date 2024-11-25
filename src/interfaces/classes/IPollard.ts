@@ -9,7 +9,6 @@
  * @prop {verify} verify
  */
 export interface IPollard {
-
   /**
    * @method getHashes
    * @desc - Get hashes in pollard.

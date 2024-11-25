@@ -2,7 +2,7 @@ import { sha3_512 } from 'js-sha3'
 import type { IHashFunctionOptions } from '@/interfaces'
 
 export const branchHashOptions: IHashFunctionOptions = {
-  'sha3_512': sha3_512.arrayBuffer
+  sha3_512: sha3_512.arrayBuffer,
 }
 
 /**
@@ -11,7 +11,7 @@ export const branchHashOptions: IHashFunctionOptions = {
  * @returns {string} - Resulting hex string converted from source.
  */
 export function bufferToHex(buf: ArrayBuffer): string {
-  return (new Uint8Array(buf)).reduce((acc: string, curr: number) => {
+  return new Uint8Array(buf).reduce((acc: string, curr: number) => {
     return acc + hexPrecompute[curr]
   }, '')
 }
@@ -272,5 +272,5 @@ const hexPrecompute: string[] = [
   'fc',
   'fd',
   'fe',
-  'ff'
+  'ff',
 ]

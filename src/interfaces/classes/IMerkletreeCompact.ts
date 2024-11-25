@@ -7,7 +7,6 @@
  * @prop {getRootAsHex} getRootAsHex
  */
 export interface IMerkletreeCompact {
-
   /**
    * @method getRoot
    * @desc - Get raw merkletree root node.

@@ -1,4 +1,4 @@
-import type { TTypedArrays } from '@/types'
+import type {TTypedArrays} from '@/types'
 
 /**
  * Compares 2 ArrayBuffers and returns true if they are an exact match.
@@ -12,13 +12,22 @@ export function arrayBuffersMatch(a: ArrayBuffer, b: ArrayBuffer): boolean {
   } else {
     switch (0) {
       case a.byteLength % 4:
-        return typedArraysMatch<Uint32Array>(new Uint32Array(a), new Uint32Array(b))
+        return typedArraysMatch<Uint32Array>(
+          new Uint32Array(a),
+          new Uint32Array(b),
+        )
       case a.byteLength % 2:
-        return typedArraysMatch<Uint16Array>(new Uint16Array(a), new Uint16Array(b))
+        return typedArraysMatch<Uint16Array>(
+          new Uint16Array(a),
+          new Uint16Array(b),
+        )
       case a.byteLength % 1:
-        return typedArraysMatch<Uint8Array>(new Uint8Array(a), new Uint8Array(b))
+        return typedArraysMatch<Uint8Array>(
+          new Uint8Array(a),
+          new Uint8Array(b),
+        )
       default:
-        throw new Error("Unexpected Result, bad math?")
+        throw new Error('Unexpected Result, bad math?')
     }
   }
 }

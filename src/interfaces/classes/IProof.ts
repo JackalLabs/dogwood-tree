@@ -6,7 +6,6 @@
  * @prop {verify} verify
  */
 export interface IProof {
-
   /**
    * @method verify
    * @desc - Async check if ArrayBuffer is present in merkletree.

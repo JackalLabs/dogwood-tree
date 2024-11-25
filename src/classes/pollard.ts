@@ -1,7 +1,7 @@
-import { branchHashOptions } from '@/utils/hash'
-import { arrayBuffersMatch } from '@/utils/comparisons'
-import type { IPollard } from '@/interfaces/classes'
-import type { TBranchHashOptionKeys } from '@/types'
+import {branchHashOptions} from '@/utils/hash'
+import {arrayBuffersMatch} from '@/utils/comparisons'
+import type {IPollard} from '@/interfaces/classes'
+import type {TBranchHashOptionKeys} from '@/types'
 
 /**
  * @class Pollard
@@ -19,7 +19,11 @@ export class Pollard implements IPollard {
    * @param {TBranchHashOptionKeys} hashType - Merkletree hash type used.
    * @param {number} height - Height in Merkletree.
    */
-  constructor (hashes: Array<ArrayBuffer>, hashType: TBranchHashOptionKeys, height: number) {
+  constructor(
+    hashes: Array<ArrayBuffer>,
+    hashType: TBranchHashOptionKeys,
+    height: number,
+  ) {
     this.hashes = hashes
     this.hashType = hashType
     this.height = height
@@ -28,12 +32,15 @@ export class Pollard implements IPollard {
   getHashes(): Array<ArrayBuffer> {
     return this.hashes
   }
+
   getHeight(): number {
     return this.height
   }
+
   getLength(): number {
     return this.hashes.length
   }
+
   async verify(): Promise<boolean> {
     if (this.hashes.length === 1) {
       return true
@@ -43,7 +50,7 @@ export class Pollard implements IPollard {
         const left = this.hashes[i * 2 + 1]
         const right = this.hashes[i * 2 + 2]
         const concat = await new Blob([left, right]).arrayBuffer()
-        if(!arrayBuffersMatch(this.hashes[i], hashFunc(concat))) {
+        if (!arrayBuffersMatch(this.hashes[i], hashFunc(concat))) {
           return false
         } else {
           // continue

@@ -1,4 +1,4 @@
-import type { TBranchHashOptionKeys } from '@/types'
+import type {TBranchHashOptionKeys} from '@/types'
 
 /**
  * @interface IMerkletreeCompactSource

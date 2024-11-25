@@ -1,9 +1,7 @@
 import type { IMultiProof } from '@/interfaces'
 
 export class MultiProof implements IMultiProof {
-
-  constructor () {
-  }
+  constructor() {}
 
   async verify(data: Array<ArrayBuffer>): Promise<boolean> {
     console.log(data)

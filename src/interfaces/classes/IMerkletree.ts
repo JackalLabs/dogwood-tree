@@ -1,4 +1,4 @@
-import type { IPollard, IProof } from '@/interfaces/classes'
+import type {IPollard, IProof} from '@/interfaces/classes'
 
 /**
  * @interface IMerkletree
@@ -12,7 +12,6 @@ import type { IPollard, IProof } from '@/interfaces/classes'
  * @prop {generateProof} generateProof
  */
 export interface IMerkletree {
-
   /**
    * @method getRoot
    * @desc - Get raw merkletree root node.
