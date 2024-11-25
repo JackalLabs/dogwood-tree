@@ -38,7 +38,7 @@ export default defineConfig({
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
       fileName: (format) => `index.${format}.js`,
-      formats: ['es'],
+      formats: ['cjs', 'es'],
       name: 'dogwood-tree'
     },
     rollupOptions: {
