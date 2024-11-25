@@ -1,8 +1,8 @@
 import type { IPollard, IProof } from '@/interfaces/classes'
 
 /**
- * @interface IProof
- * @desc - Merkletree Proof.
+ * @interface IMerkletree
+ * @desc - Merkletree Proving Structure.
  * @since 1.0.0
  *
  * @prop {getRoot} getRoot

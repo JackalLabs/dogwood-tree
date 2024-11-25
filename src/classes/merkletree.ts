@@ -2,7 +2,7 @@ import { Pollard, Proof } from '@/classes'
 import { calculateBranches, stringToUint8 } from '@/utils/misc'
 import { branchHashOptions, bufferToHex } from '@/utils/hash'
 import { arrayBuffersMatch } from '@/utils/comparisons'
-import type { IMerkletreeSource } from '@/interfaces'
+import type {IMerkletreeCompact, IMerkletreeCompactSource, IMerkletreeSource} from '@/interfaces'
 import type { IMerkletree, IPollard, IProof } from '@/interfaces/classes'
 import type { TBranchHashOptionKeys } from '@/types'
 
@@ -118,6 +118,85 @@ export class Merkletree implements IMerkletree {
       }
     }
   }
+}
+
+/**
+ * @class MerkletreeCompact
+ * @desc - Merkletree Compact instance.
+ * @see {IMerkletreeCompact}
+ */
+export class MerkletreeCompact implements IMerkletreeCompact {
+  protected readonly root: ArrayBuffer
+
+  /**
+   * @constructor MerkletreeCompact
+   * @protected
+   */
+  protected constructor(r: ArrayBuffer) {
+    this.root = r
+  }
+
+  /**
+   * @constructor MerkletreeCompact
+   * @param {IMerkletreeCompactSource} input - Merkletree Compact creation parameters.
+   * @returns {Promise<IMerkletreeCompact>}
+   */
+  static async grow(input: IMerkletreeCompactSource): Promise<IMerkletreeCompact> {
+    let { seed, sapling, chunkSize, hashType = 'sha3_512' } = input
+
+    if (sapling) {
+      // do nothing
+    } else if (seed && chunkSize) {
+      sapling = []
+      for (let i = 0, ii = 0; i < seed.byteLength; i += chunkSize, ii++) {
+        const bufChunk = seed.slice(i, i + chunkSize)
+        const str = ii.toString() + bufferToHex(bufChunk)
+        const hashName = await crypto.subtle.digest(
+            'SHA-256',
+            stringToUint8(str),
+        )
+        sapling.push(hashName)
+      }
+    } else {
+      throw new Error('No Data Provided!')
+    }
+
+    if (!Object.keys(branchHashOptions).includes(hashType)) {
+      throw new Error(`Unsupported hashType of "${hashType}"!`)
+    }
+    const hashFunc = branchHashOptions[hashType]
+    const branchesLen = calculateBranches(sapling.length)
+    let queue = Array(branchesLen).fill(new ArrayBuffer(64))
+    for (let i = 0; i < sapling.length; i++) {
+      queue[i] = hashFunc(sapling[i])
+    }
+    while (queue.length > 1) {
+      const cycle = []
+      for (let i = queue.length - 1;  i >= 0; i--) {
+        cycle[i] = merkle(queue[i * 2], queue[i * 2 + 1], hashFunc)
+      }
+      queue = cycle
+    }
+
+    return new MerkletreeCompact(queue[0])
+  }
+
+  getRoot(): ArrayBuffer {
+    return this.root
+  }
+  getRootAsHex(): string {
+    return bufferToHex(this.root)
+  }
+}
+
+function merkle(left: ArrayBuffer, right: ArrayBuffer, hashFunc: any): ArrayBuffer {
+  const length = left.byteLength + right.byteLength
+  const final = new Uint8Array(length)
+  const uLeft = new Uint8Array(left)
+  const uRight = new Uint8Array(right)
+  final.set(uLeft, 0)
+  final.set(uRight, left.byteLength)
+  return hashFunc(final)
 }
 
 function indexOf(needle: ArrayBuffer, haystack: Array<ArrayBuffer>): number {
