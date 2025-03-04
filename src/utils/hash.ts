@@ -1,5 +1,7 @@
-import { sha3_512 } from 'js-sha3'
+import js_sha3 from 'js-sha3'
 import type { IHashFunctionOptions } from '@/interfaces'
+
+const { sha3_512 } = js_sha3
 
 export const branchHashOptions: IHashFunctionOptions = {
   sha3_512: sha3_512.arrayBuffer,
