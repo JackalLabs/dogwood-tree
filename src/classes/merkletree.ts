@@ -183,23 +183,47 @@ export class MerkletreeCompact implements IMerkletreeCompact {
   static async grow(
     input: IMerkletreeCompactSource,
   ): Promise<IMerkletreeCompact> {
-    let { seed, sapling, chunkSize, hashType = 'sha3_512' } = input
+    let { raw, seed, sapling, chunkSize, hashType = 'sha3_512' } = input
 
-    if (sapling) {
-      // do nothing
-    } else if (seed && chunkSize) {
-      sapling = []
-      for (let i = 0, ii = 0; i < seed.byteLength; i += chunkSize, ii++) {
-        const bufChunk = seed.slice(i, i + chunkSize)
-        const str = ii.toString() + bufferToHex(bufChunk)
-        const hashName = await crypto.subtle.digest(
-          'SHA-256',
-          stringToUint8(str),
-        )
-        sapling.push(hashName)
-      }
-    } else {
-      throw new Error('No Data Provided!')
+    switch (true) {
+      case !!sapling:
+        if (!sapling) {
+          throw new Error('No Data Provided!')
+        }
+        // no action required
+        break
+      case !!seed && !!chunkSize:
+        if (!seed || !chunkSize) {
+          throw new Error('No Data Provided!')
+        }
+        sapling = []
+        for (let i = 0, ii = 0; i < seed.byteLength; i += chunkSize, ii++) {
+          const bufChunk = seed.slice(i, i + chunkSize)
+          const str = ii.toString() + bufferToHex(bufChunk)
+          const hashName = await crypto.subtle.digest(
+            'SHA-256',
+            stringToUint8(str),
+          )
+          sapling.push(hashName)
+        }
+        break
+      case !!raw && !!chunkSize:
+        if (!raw || !chunkSize) {
+          throw new Error('No Data Provided!')
+        }
+        sapling = []
+        for (let i = 0, ii = 0; i < raw.size; i += chunkSize, ii++) {
+          const blobChunk = raw.slice(i, i + chunkSize)
+          const str = ii.toString() + bufferToHex(await blobChunk.arrayBuffer())
+          const hashName = await crypto.subtle.digest(
+            'SHA-256',
+            stringToUint8(str),
+          )
+          sapling.push(hashName)
+        }
+        break
+      default:
+        throw new Error('No Data Provided!')
     }
 
     if (!Object.keys(branchHashOptions).includes(hashType)) {
