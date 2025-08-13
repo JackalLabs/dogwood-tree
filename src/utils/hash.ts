@@ -1,10 +1,12 @@
-import js_sha3 from 'js-sha3'
+import { blake3 } from '@noble/hashes/blake3.js'
+import { sha3_512 } from '@noble/hashes/sha3.js'
 import type { IHashFunctionOptions } from '@/interfaces'
 
-const { sha3_512 } = js_sha3
+
 
 export const branchHashOptions: IHashFunctionOptions = {
-  sha3_512: sha3_512.arrayBuffer,
+  blake3: (src: ArrayBuffer) => {return blake3(new Uint8Array(src)).buffer},
+  sha3_512: (src: ArrayBuffer) => {return sha3_512(new Uint8Array(src)).buffer},
 }
 
 /**

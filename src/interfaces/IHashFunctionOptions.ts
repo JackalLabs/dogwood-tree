@@ -7,5 +7,6 @@
  */
 export interface IHashFunctionOptions {
   // [key: string]: ((a: ArrayBuffer) => ArrayBuffer) | ((a: ArrayBuffer) => Promise<ArrayBuffer>)
+  blake3: (a: ArrayBuffer) => ArrayBuffer
   sha3_512: (a: ArrayBuffer) => ArrayBuffer
 }

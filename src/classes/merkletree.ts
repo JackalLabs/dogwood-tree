@@ -235,12 +235,16 @@ export class MerkletreeCompact implements IMerkletreeCompact {
     for (let i = 0; i < sapling.length; i++) {
       queue[i] = hashFunc(sapling[i])
     }
-    while (queue.length > 1) {
+
+    let run = queue.length > 1
+    while (run) {
       const cycle = []
-      for (let i = queue.length - 1; i >= 0; i--) {
+      for (let i = 0; i < queue.length / 2; i++) {
         cycle[i] = merkle(queue[i * 2], queue[i * 2 + 1], hashFunc)
       }
+
       queue = cycle
+      run = queue.length > 1
     }
 
     return new MerkletreeCompact(queue[0])
